@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <pre>
+        <label for="title">Title：</label>
+        <input type="text" id="title" name="title" maxlength="255" value="">
+        <label for="subtitle">サブタイトル：</label>
+        <input type="text" id="sub_title" name="title" maxlength="255" size="50" value="">
+        <label for="date">日付：</label>
+        <input type="date" id="date" name="date" value="">
+        <label for="author">作者：</label>
+        <input type="text" id="author" name="author" maxlength="255" value="">
+        <label for="category">Categoryｓ：</label>
+        <select id="category" name="category">
+            <option value="本">本</option>
+            <option value="音楽">音楽</option>
+            <option value="美術">美術</option>
+            <option value="映画">映画</option>
+            <option value="TV">TV</option>
+            <option value="記事">記事</option>
+        </select>
+        <label for="media">媒体：</label>
+        <select id="media" name="media">
+            <option value=""></option>
+            <option value="Book">Book</option>
+            <option value="CD">CD</option>
+            <option value="DVD">DVD</option>
+            <option value="Blu-ray">Blu-ray</option>
+            <option value="Theater">Theater</option>
+            <option value="Record">Record</option>
+            <option value="Internet">Internet</option>
+        </select>
+        <label for="impression">感想：</label>
+        <textarea type="text" id="impression" name="impression" maxlength="1000" value="" rows="15" cols="80" value="送信する"></textarea>
+        <!-- <input type="submit" value="送信する"> -->
+        
+        </pre>
+    </form>
+    <a href="#" id="download" download="memo.txt" onclick="Download()">download</a>
+    <script>
+        function Download(){
+            const content_01 = document.getElementById('title').value;
+            const content_02 = document.getElementById('sub_title').value;
+            const content_03 = document.getElementById('date').value;
+            const content_04 = document.getElementById('author').value;
+            const content_05 = document.getElementById('category').value;
+            const content_06 = document.getElementById('media').value;
+            const content_07 = document.getElementById('impression').value;
+
+            const array = [ "Title:" , content_01 ,'\n',
+                            "サブタイトル:" , content_02 ,'\n', 
+                            "日付:" , content_03 ,'\n', 
+                            "作者:" , content_04 ,'\n', 
+                            "Categorys:" , content_05 ,'\n', 
+                            "媒体:" , content_06 ,'\n', 
+                            "感想:" , content_07];
+
+            const blob = new Blob(array ,{"type" : "text/plain"});
+
+            document.getElementById("download").href = window.URL.createObjectURL(blob);
+
+        }
+    </script>
+</body>
+</html>
