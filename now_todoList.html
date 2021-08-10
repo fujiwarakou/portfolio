@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="practice_now_003.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+    <div id="app">
+        <p>{{now}}</p>
+        <h2>TODO LIST</h2>
+        <ul>
+            <li v-for="(todoList, index) in todoLists">
+                <input type="checkbox" v-model="todoList.checkToggle">
+                <label v-bind:class={taskDone:todoList.checkToggle}>{{todoList.todo}}</label>
+                <button v-on:click="deleteItem(index)">Delete</button>
+            </li>
+        </ul>
+        <input type="text" v-model="newTodo">
+        <button v-on:click="addItem">Add</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            now: '',
+            newTodo: '',
+            todoLists: [
+                { todo: "ãƒ‡ã‚¸ã‚¿ãƒ«æ™‚è¨ˆä½œæˆ�", checkToggle: false },
+                { todo: "todoListä½œæˆ�", checkToggle: false },
+                { todo: "study", checkToggle: false }
+            ]
+        },
+        mounted: function () {
+            setInterval(this.time, 1000)
+        },
+        methods: {
+            time: function () {
+                this.now = new Date().toLocaleString()
+            },
+            addItem: function () {
+                if (this.newTodo == '') return
+                this.todoLists.push({
+                    todo: this.newTodo,
+                    checkToggle: false
+                })
+                this.newTodo = ''
+            },
+            deleteItem: function (index) {
+                this.todoLists.splice(index, 1)
+            }
+        }
+    })
+</script>
+
+</html>
